@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body  style="background-color: #212121; color: white;">
+
+    <!-- <div class="parent">
+      <div class="day">monday</div>
+      <div class="day">Friday</div>
+      <div class="day">Sunday</div>
+      <div class="day">Tuesday</div>
+    </div> -->
+
+    <!-- <h1>HI Adithya</h1>
+    <p>This is the message from AccioJobs</p>
+
+
+    <div class="BtnContainer">
+    <button id="child1"><span>Click Meeee</span></button>
+    <button id="child2">Btn Child 2</button>
+    <button id="child3">Btn Child 3</button>
+    </div> -->
+
+
+    <!-- <script src="script.js"></script> -->
+  </body>
+<script>
+  // const Parent = document.querySelector('.parent');
+  // console.log(Parent);
+  // console.log(Parent.children);
+  // console.log(Parent.children[1].innerHTML);
+
+  // for (let i = 0; i < Parent.children.length; i++) {
+  //   console.log(Parent.children[i].innerHTML);
+  // };
+
+  // console.log(Parent.childNodes);
+
+
+  // const Div = document.createElement('div');
+  // console.log(Div);
+
+  
+//******************* Div Creation using createElement Method *******************
+
+  // Div.className = "MyDivClass";
+  // Div.id = Math.round(Math.random() * 10 + 1);
+  // Div.setAttribute('title', 'Generate this Div');
+  // Div.style.backgroundColor = "red";
+  // Div.style.width = "100px";
+  // Div.style.height = "50px";
+  // Div.style.margin = "10px auto";
+  // Div.style.padding = "10px";
+  // Div.style.textAlign = "center";
+  // Div.style.lineHeight = "center";
+  // Div.style.borderRadius = "10px";
+  // Div.style.border = "2px solid yellow";
+  // // Div.innerHTML = "This is a dynamically created div";
+  // const textNode = document.createTextNode("Adithya Sharma");
+  // Div.appendChild(textNode);
+  // document.body.appendChild(Div);
+
+//******************* Nested Div Creation using createElement Method *******************
+  
+  // const wapperDiv = document.createElement('div');
+  // wapperDiv.style.width = "300px auto";
+  // wapperDiv.style.height = "100px";
+  // wapperDiv.style.padding = "10px";
+  // wapperDiv.style.margin = "10px";
+  // wapperDiv.style.borderRadius = "10px";
+  // wapperDiv.style.border = "2px solid yellow";
+  
+
+  // const heading = document.createElement('h2');
+  // heading.textContent = "This is my Nested Div Created by 'createElement'.";
+
+
+  // const description = document.createElement('p');
+  // description.textContent = "This is a description of the nested div created by 'createElement' method. It is used to demonstrate how to create and manipulate DOm elements using JavaScript.";
+
+
+  // const button = document.createElement('button');
+  // button.style.width = "100px auto";
+  // button.style.height = "50px";
+  // button.style.padding = "10px";
+  // button.style.margin = "10px";
+  // button.style.borderRadius = "10px";
+  // button.style.border = "2px solid yellow";
+  // button.textContent = "Hi This is a Nested Button. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.";
+
+  // button.addEventListener('click',() => {
+  //     wapperDiv.style.display = "none";
+  // });
+  
+  // wapperDiv.appendChild(heading);
+  // wapperDiv.appendChild(description);
+  // wapperDiv.appendChild(button);
+
+  // document.body.appendChild(wapperDiv);
+
+  
+
+//******************* Dynamic Card Creation *******************
+
+// ******** So, In this we have just created the Dynamic Card Creation using CreateElement Method. Like we have given the array of content where we have the title and body of the card and this wil eb wappered in the section tag and this section tag wil be in div tag. 
+// ******** And we have also added the delete button to delete the card when clicked on it. This Div tag is only one for all the array content but for every array content induvially we hav to creat a section and heading and para and delete button. After that we have added the text content inside the heading an para are title and body of the array respectively. We have to wapper that heading & para inside the section and the section inside the Div.
+
+const array = [
+  { title: "Card A", body: "Lorem ipsum…" },
+  { title: "Card B", body: "Dolor sit amet…" },
+  { title: "Card C", body: "Lorem ipsum…" },
+  { title: "Card D", body: "Dolor sit amet…" },
+  { title: "Card E", body: "Lorem ipsum…" },
+  { title: "Card F", body: "Dolor sit amet…" },
+  { title: "Card G", body: "Lorem ipsum…" },
+  { title: "Card H", body: "Dolor sit amet…" },
+  { title: "Card I", body: "Lorem ipsum…" },
+  { title: "Card J", body: "Dolor sit amet…" },
+  { title: "Card L", body: "Lorem ipsum…" },
+  { title: "Card M", body: "Dolor sit amet…" },
+];
+
+const wapperdiv = document.createElement('div');
+wapperdiv.id = "cardContainer";
+wapperdiv.style.display = "flex";
+wapperdiv.style.flexWrap = "wrap";
+wapperdiv.style.justifyContent = "space-evenly";
+wapperdiv.style.margin = "20px auto";
+wapperdiv.style.padding = "20px";
+wapperdiv.style.backgroundColor = "#212121";
+wapperdiv.style.borderRadius = "10px";
+wapperdiv.style.border = "2px solid yellow";
+
+const InputFilter = document.createElement('input');
+InputFilter.type = 'search';
+InputFilter.placeholder = "Search Cards";
+InputFilter.style.justifyItems = "center";
+InputFilter.style.alignItems = "center";
+InputFilter.style.display = 'block';
+InputFilter.style.width = '300px';
+InputFilter.style.height = '40px';
+InputFilter.style.margin = '20px auto';
+InputFilter.style.padding = '10px 20px';
+InputFilter.style.borderRadius = '25px';
+InputFilter.style.border = '2px solid yellow'; 
+InputFilter.style.fontSize = '16px';
+InputFilter.style.fontFamily = 'Arial, sans-serif';
+InputFilter.style.textAlign = 'center';
+
+
+InputFilter.addEventListener('input', () => 
+{
+  // Logic 1
+
+  const SearchValue = InputFilter.value.toLowerCase();
+
+  const CardClass = document.querySelectorAll('.card');
+
+  CardClass.forEach(Carditems => {
+    const title = Carditems.querySelector('h3').textContent.toLowerCase();
+
+    if(title.includes(SearchValue)){
+      Carditems.style.display = 'flex';
+    }
+    else{
+      Carditems.style.display = 'None';
+    }
+  });
+
+  // Logic 2
+  
+  const Searchbar = InputFilter.value.toLowerCase();
+  if(Searchbar === "")
+  {
+    alert('Please enter a value to search');
+  }
+  else if(Searchbar !== "")
+  {
+    const cardClass = document.querySelectorAll('.card');
+    console.log(cardClass);
+    
+    for (let i = 0; i < cardClass.length; i++) 
+    {
+      const SearchTitle = cardClass[i].querySelector('h3').textContent.toLowerCase();
+        if(SearchTitle === Searchbar)
+        {
+          cardClass[i].style.display = "flex";
+        }
+        else
+        {
+           cardClass[i].style.display = "none";
+        }
+    }
+  }
+});
+
+wapperdiv.appendChild(InputFilter);
+
+
+for (let i = 0; i < array.length; i++) {
+
+const wappersection = document.createElement('section');
+
+  wappersection.className = "card";
+  wappersection.style.width = "300px";
+  wappersection.style.height = "200px";
+  wappersection.style.margin = "10px";
+  wappersection.style.padding = "10px";
+  wappersection.style.borderRadius = "10px";
+  wappersection.style.border = "2px solid yellow";
+  wappersection.style.backgroundColor = "#333";
+  wappersection.style.color = "white";
+  wappersection.style.display = "flex";
+  wappersection.style.flexDirection = "column";
+  wappersection.style.justifyContent = "center";
+  wappersection.style.alignItems = "center";
+  wappersection.addEventListener('mouseenter', () => {
+      wappersection.style.transform = "scale(1.023)";
+  });
+  wappersection.addEventListener('mouseleave', () => {
+      wappersection.style.transform = "scale(1)";
+  });
+
+
+const heading = document.createElement('h3');
+heading.style.backgroundColor = "green";
+heading.style.color = "white";
+heading.style.padding = "10px";
+heading.style.borderRadius = "5px";
+heading.style.textAlign = "center"; 
+heading.style.marginBottom = "10px";
+heading.style.width = "50%";
+
+
+const para = document.createElement('p');
+para.style.backgroundColor = "blue";
+para.style.color = "white";
+para.style.padding = "10px";
+para.style.borderRadius = "5px";
+para.style.textAlign = "center"; 
+para.style.marginBottom = "10px";
+para.style.width = "100%";
+
+const DeleteButton = document.createElement('button');
+DeleteButton.textContent = "Delete";
+DeleteButton.style.width = '100px auto';
+DeleteButton.style.backgroundColor = "red";
+DeleteButton.style.color = "white";
+DeleteButton.style.padding = "10px";
+DeleteButton.style.borderRadius = "50px";
+DeleteButton.style.border = "none";
+DeleteButton.style.cursor = "pointer";
+DeleteButton.addEventListener('click',() => {
+   DeleteButton.parentElement.remove();
+   alert("Card Deleted");
+   console.log("Card Deleted");
+});
+
+  
+  heading.textContent = array[i].title;
+  para.textContent = array[i].body;
+
+  wappersection.appendChild(heading);
+  wappersection.appendChild(para);
+  wappersection.appendChild(DeleteButton);
+  
+  wapperdiv.appendChild(wappersection);
+  
+};
+
+
+
+document.body.appendChild(InputFilter);
+document.body.appendChild(wapperdiv);
+
+
+
+
+</script>
+</html>
