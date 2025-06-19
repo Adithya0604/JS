@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignUp</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ffe3c0; /* light peach background */
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .MainContainer {
+      background-color: #fff;
+      width: 400px;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .label {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 15px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 5px 0 10px 0;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    input::placeholder {
+      color: #999;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .SubmitButton {
+      width: 50%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: white;
+      border: 2px solid black;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block; /* Make it block element */
+      margin: 0 auto; /* Center horizontally */
+    }
+
+    .SubmitButton:hover {
+      background-color: #f4f4f4;
+    }
+    .success-message {
+      color: green;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+    .Custom-Confirm-Overlayout {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .custom-confirm-box {
+      background: #fff;
+      padding: 30px;
+      width: 350px;
+      height: 220px; /* Fixed height to prevent shrinking */
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .custom-confirm-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      height: 50px; 
+    }
+    .custom-confirm-buttons button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .custom-confirm-box p {
+      font-size: 16px;
+      margin-top: 20px;
+      height: 60px; /* Fixed height for text area */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  <body>
+    <div class="MainContainer">
+      <label class="label">Email</label>
+      <input type="text" placeholder="Example@email.com" id="EmailInput" />
+      <p id="EmailP" class="error-message">
+        Make sure email is more than 3 characters and has @ and a .
+      </p>
+
+      <label class="label">Password</label>
+      <input type="password" placeholder="Your Password" id="PassCodeInput" />
+      <p id="PassCodeP" class="error-message">
+        Make sure password is more than 8 characters.
+      </p>
+
+      <button class="SubmitButton" type="button">Submit</button>
+
+      <p id="successmesage" class="success-message">Sucesfully Submited...</p>
+
+      <div class="Custom-Confirm-Overlayout" id="CustomConfirmOverlayout">
+        <div class="custom-confirm-box">
+          <p id="custom-confirm-para">Are you sure to submit?</p>
+          <div id="custom-confirm-buttons">
+            <button id="confirmCancel">Cancel</button>
+            <button id="confirmOK">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Selectors of the Body
+      const EmailInput = document.getElementById("EmailInput");
+      const EmailP = document.getElementById("EmailP");
+      const PassCodeInput = document.getElementById("PassCodeInput");
+      const PassCodeP = document.getElementById("PassCodeP");
+      const SubmitButtonDiv = document.querySelector(".SubmitButton");
+      const successmesage = document.getElementById("successmesage");
+      const CustomConfirmOverlayout = document.getElementById(
+        "CustomConfirmOverlayout"
+      );
+      const confirmCancel = document.getElementById("confirmCancel");
+      const confirmOK = document.getElementById("confirmOK");
+      const customConfirmPara = document.getElementById("custom-confirm-para");
+
+      //Storage System
+            const MyStorage = {
+              UserMail: '',
+              UserPassCode: ''
+            };
+
+      // Boolean Values For vertifcation
+
+      let isEmailValid = false;
+      let isPassCodeValid = false;
+
+      //Check Email Function
+      function CheckEmail(mail) {
+        const list = ["gmail", "hotmail", "yahoo", "email"];
+
+        EmailP.style.display = "None";
+
+        if (!mail) {
+          showEmailError("Invalid Email...");
+          isEmailValid = false;
+          return;
+        }
+
+        if (!mail.includes("@")) {
+          showEmailError("Invalid Email... Does not include '@'...");
+          isEmailValid = false;
+          return;
+        }
+
+        const MainMail = mail.split("@");
+
+        if (MainMail.length !== 2) {
+          showEmailError("Invalid Email Length");
+          isEmailValid = false;
+          return;
+        }
+
+        const local = MainMail[0];
+
+        if (local.length < 3 || local.length > 20) {
+          showEmailError(
+            "Please the Email length is too Short or Too Long... Bring it in the range"
+          );
+          isEmailValid = false;
+          return;
+        }
+
+        if (!/^[a-zA-Z0-9]+$/.test(local)) {
+          showEmailError(
+            "Email Local part should contains numbers and/or letters only"
+          );
+          isEmailValid = false;
+          return;
+        }
+
+        const domain = MainMail[1].split(".");
+        if (domain.length < 2) {
+          showEmailError("Invalid Domain Length");
+          isEmailValid = false;
+          return;
+        }
+
+        const MainDomain = domain[0];
+        const TailMail = domain[domain.length - 1];
+
+        if (!list.includes(MainDomain)) {
+          showEmailError("Please Include one of the domian..");
+          isEmailValid = false;
+          return;
+        }
+
+        if (TailMail !== "com") {
+          showEmailError('This Email should be ended with "com"...');
+          isEmailValid = false;
+          return;
+        }
+
+        isEmailValid = true;
+      }
+
+      //Checking PassCode Function
+      function CheckPassCode(PassWord) {
+        PassCodeP.style.display = "None";
+
+        if (!PassWord) {
+          showPassCodeError("Invalid PassCode");
+          isPassCodeValid = false;
+          return;
+        }
+
+        if (PassWord.length < 8) {
+          showPassCodeError("Please Enter the valid length");
+          isPassCodeValid = false;
+          return;
+        }
+
+        const RegExpSpecial = /[!@#$%^&*]/.test(PassWord);
+        const RegExpUpper = /[A-Z]/.test(PassWord);
+        const RegExplower = /[a-z]/.test(PassWord);
+        const RegExpNumber = /[0-9]/.test(PassWord);
+
+        if (!(RegExpNumber && RegExpSpecial && RegExpUpper && RegExplower)) {
+          showPassCodeError("Requirment of the passcode is not fullied...");
+          isPassCodeValid = false;
+          return;
+        }
+        isPassCodeValid = true;
+      }
+
+      function showEmailError(message) {
+        EmailP.textContent = message;
+        EmailP.style.display = "block";
+      }
+      function showPassCodeError(message) {
+        PassCodeP.textContent = message;
+        PassCodeP.style.display = "block";
+      }
+
+      EmailInput.addEventListener("input", function () {
+        CheckEmail(this.value);
+      });
+      PassCodeInput.addEventListener("input", function () {
+        CheckPassCode(this.value);
+      });
+
+      SubmitButtonDiv.addEventListener("click", function () {
+        CheckEmail(EmailInput.value);
+        CheckPassCode(PassCodeInput.value);
+
+        if (isEmailValid && isPassCodeValid) {
+          CustomConfirmOverlayout.style.display = "flex";
+
+        } else {
+          alert("Please Fix the error before clicking the submit button");
+        }
+      });
+
+      confirmOK.addEventListener("click", () => {
+        confirmOK.style.visibility = 'hidden';
+        confirmCancel.style.visibility = 'hidden';
+
+        MyStorage.UserMail = EmailInput.value;
+        MyStorage.UserPassCode = PassCodeInput.value;
+
+        customConfirmPara.textContent = "Thank you!!!";
+
+        successmesage.style.display = "block";
+
+        EmailInput.value = "";
+        PassCodeInput.value = "";
+
+        isEmailValid = false;
+        isPassCodeValid = false;
+
+        EmailP.style.display = "none";
+        PassCodeP.style.display = "none";
+
+        setTimeout(() => {
+          CustomConfirmOverlayout.style.display = "none";
+          successmesage.style.display = "none";
+        }, 2000);
+      });
+
+      confirmCancel.addEventListener("click", () => {
+        CustomConfirmOverlayout.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

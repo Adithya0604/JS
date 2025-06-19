@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DRAG AND DROP</title>
+  </head>
+  <style>
+    #EnterHere {
+      width: 200px;
+      padding: 5px;
+    }
+    .TaskPending,
+    .TaskProgress,
+    .TaskDone {
+      width: 200px;
+      height: 300px;
+      border: 2px solid black;
+      padding: 10px;
+      margin: 10px;
+      display: inline-block;
+      vertical-align: top;
+    }
+  </style>
+  <body>
+    <div class="mainContainer">
+      <div class="TaskPending" data-status="TODO">
+        <h2>ToDo</h2>
+      </div>
+      <div class="TaskProgress" data-pending="taskProgress">
+        <h2>Progress Task</h2>
+      </div>
+      <div class="TaskDone" data-complete="TaskComplete">
+        <h2>Completed Task</h2>
+      </div>
+    </div>
+    <Input id="EnterHere" placeholder="Tasks Tobe Done"></Input>
+    <button id="Create">Create New Task</button>
+
+    <script>
+      //       const MAINCONTAINER = document.querySelectorAll(".mainContainer");
+      const TASKPENDING = document.querySelector(".TaskPending");
+      //       const TASKPROGRESS = document.querySelectorAll(".TaskProgress");
+      //       const TASKDONE = document.querySelectorAll(".TaskDone");
+
+      const ButtonForCreate = document.getElementById("Create");
+      const InputTask = document.getElementById("EnterHere");
+      let count = 1;
+      
+      InputTask.addEventListener('keypress', (ev) => {
+        if(ev.keyCode === 13){
+          ButtonForCreate.click();
+        }
+      });
+      
+      
+      ButtonForCreate.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        const InputValue = InputTask.value.trim();
+
+        if(!InputValue) return ;
+        
+        const CreateTask = document.createElement("div");
+        CreateTask.textContent = InputValue;
+        CreateTask.classList.add("Task");
+        CreateTask.id = `SeprateTasks${count}`;
+        CreateTask.draggable = true;
+        
+        // CreateTask.style.display = 'inline-block';
+        // CreateTask.style.overflow = 'hidden';
+        // CreateTask.style.textOverflow = 'ellipsis';
+        // CreateTask.style.whiteSpace = 'nowrap';
+        
+        const charlength = InputTask.getBoundingClientRect().width;
+        CreateTask.style.width = charlength + 'px';
+        
+        TASKPENDING.appendChild(CreateTask);
+        
+        InputTask.value = "";
+        count++;
+      });
+
+      
+      
+      document.addEventListener("dragstart", (e) => {
+        if (e.target.classList.contains("Task")) {
+          dragStart(e);
+        }
+      });
+
+      document.addEventListener("dragover", (e) => {
+        const cloest = e.target.closest(
+          ".TaskPending, .TaskProgress, .TaskDone"
+        );
+        if (cloest) {
+          dragOver(e);
+        }
+      });
+
+      document.addEventListener("drop", (ev) => {
+        const cloest = ev.target.closest(
+          ".TaskPending, .TaskProgress, .TaskDone"
+        );
+        if (cloest) {
+          ev.preventDefault();
+          const dataMoved = ev.dataTransfer.getData("text/plain");
+          const taskmoved = document.getElementById(dataMoved);
+          ev.target.appendChild(taskmoved);
+        }
+      });
+
+      function dragStart(ev) {
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+        ev.dataTransfer.effectAllowed = "move";
+      }
+
+      function dragOver(ev) {
+        ev.preventDefault();
+      }
+
+      //       function drop(ev) {
+      //         ev.preventDefault();
+      //         const dataMoved = ev.dataTransfer.getData("text/plain");
+      //         const taskmoved = document.getElementById(dataMoved);
+      //         ev.target.appendChild(taskmoved);
+      //         console.log(`datamoved ${dataMoved}, taskmoved ${taskmoved}`);
+      //       }
+    </script>
+  </body>
+</html>

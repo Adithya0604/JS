@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+  </head>
+  <body>
+    <button id="Btn">Button Cliked</button>
+  </body>
+
+  <script>
+    setImmed
+  </script>
+  <script>
+    class React {
+      constructor() {
+        this.name = "Adithya Sharma";
+        this.uid = "10598";
+
+        document
+          .getElementById("Btn")
+          .addEventListener("click", this.handleClick.bind(this));
+//             document.getElementById("Btn").addEventListener("click", ()=> {
+//                                                 console.log("Button Cliked First time...");
+//             });
+      }
+      handleClick() {
+        console.log("Button Clicked");
+        console.log(
+          `this is the name ${this.name} & uid ${this.uid}... please contanct them...`
+        );
+      }
+    }
+    const app = new React();
+  </script>
+</html>

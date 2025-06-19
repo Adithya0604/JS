@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    * {
+      box-sizing:border-box;
+    }
+    body {
+      margin: 0px;
+    }
+    .header {
+      text-align: center;
+      padding: 10px;
+      /* text-decoration: ; */
+    }
+    .row {
+      padding: 0px 4px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .column {
+      flex: 25%;
+      max-width: 25%;
+      padding: 0px 4px;
+    }
+
+    .column > img {
+      margin-top: 8px;
+      vertical-align: middle;
+    }
+
+    @media screen and (max-width: 800px) {
+      .column {
+        flex: 50%;
+        max-width: 50%;
+      }
+    }
+    
+    @media screen and (max-width: 600px) {
+      .column {
+        flex: 100%;
+        max-width: 100%;
+      }
+    }
+    
+  </style>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <h1>Responsive Image Grid</h1>
+      <p>Resize the browser window to see the responsive effect.</p>
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="row">
+      <div class="column">
+        <img
+          src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=3308&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          style="width: 100%"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1496449903678-68ddcb189a24?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmFuZG9tfGVufDB8fDB8fHww"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2021/09/02/04/54/data-6592683_1280.png"
+          style="width: 100%"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHJhbmRvbXxlbnwwfHwwfHx8MA%3D%3D"
+          style="width: 100%"
+        />
+        <img
+          src="https://plus.unsplash.com/premium_photo-1666900440561-94dcb6865554?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2016/09/01/19/13/background-1637197_1280.jpg"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2018/03/25/22/56/dice-3261099_1280.png"
+          style="width: 100%"
+        />
+      </div>
+
+      <div class="column">
+        <img
+          src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=3308&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          style="width: 100%"
+        />
+        <img
+          src="https://plus.unsplash.com/premium_photo-1666900440561-94dcb6865554?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+          style="width: 100%"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHJhbmRvbXxlbnwwfHwwfHx8MA%3D%3D"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2018/03/25/22/56/dice-3261099_1280.png"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2021/09/02/04/54/data-6592683_1280.png"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2016/09/01/19/13/background-1637197_1280.jpg"
+          style="width: 100%"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1496449903678-68ddcb189a24?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmFuZG9tfGVufDB8fDB8fHww"
+          style="width: 100%"
+        />
+      </div>
+
+      <div class="column">
+        <img
+          src="https://plus.unsplash.com/premium_photo-1666900440561-94dcb6865554?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+          style="width: 100%"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1496449903678-68ddcb189a24?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmFuZG9tfGVufDB8fDB8fHww"
+          style="width: 100%"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=3308&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          style="width: 100%"
+        /><img
+          src="https://cdn.pixabay.com/photo/2016/09/01/19/13/background-1637197_1280.jpg"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2021/09/02/04/54/data-6592683_1280.png"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2018/03/25/22/56/dice-3261099_1280.png"
+          style="width: 100%"
+        />
+      </div>
+
+      <div class="column">
+        <img
+          src="https://plus.unsplash.com/premium_photo-1666900440561-94dcb6865554?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+          style="width: 100%"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=3308&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          style="width: 100%"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1496449903678-68ddcb189a24?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmFuZG9tfGVufDB8fDB8fHww"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2018/03/25/22/56/dice-3261099_1280.png"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2016/09/01/19/13/background-1637197_1280.jpg"
+          style="width: 100%"
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2021/09/02/04/54/data-6592683_1280.png"
+          style="width: 100%"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHJhbmRvbXxlbnwwfHwwfHx8MA%3D%3D"
+          style="width: 100%"
+        />
+      </div>
+    </div>
+  </body>
+</html>

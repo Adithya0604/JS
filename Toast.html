@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toast</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  </head>
+  <style>
+    .toastNotification {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+    }
+    .toast {
+      position: relative;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 2px solid black;
+      font-size: 18px;
+      background-color: #fff;
+      display: flex;
+      min-width: 400px;
+      align-items: center;
+    }
+    .toast.success {
+      /* background-color: #fff; */
+      color: green;
+      border: 1px solid rgb(234, 224, 224);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .toast.error {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgb(234, 224, 224);
+      color: red;
+    }
+    .toast i {
+      margin-right: 20px;
+      color: #196819;
+      font-size: 28px;
+    }
+    .toast.error i {
+      color: red;
+    }
+    .toast::after {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+      left: 0;
+      height: 3px;
+      background-color: green;
+    }
+    .toast.error:after {
+      background-color: red;
+    }
+  </style>
+
+  <body>
+    <div class="My-Buttons">
+      <button class="Add">ADD Item</button>
+      <button class="Delete">Delete Item</button>
+    </div>
+
+    <div class="toastNotification">
+      <!-- <div class="toast add">
+        <i class="fa-solid fa-circle-check">Successfully Added Item...</i>
+      </div>
+      <div class="toast error">
+        <i class="fa-solid fa-circle-exclamation">Deleted Item...</i>
+      </div> -->
+    </div>
+  </body>
+
+  <script>
+    const ToastNotification = document.querySelector(".toastNotification");
+    const Buttons = document.querySelector(".My-Buttons");
+
+    let showToast = (message, type) => {
+      let toast = document.createElement("div");
+      
+      // <===> instead of this innerhtml we a=havve other methods... <===>
+      //       toast.classList.add("toast");
+      //       toast.innerHTML = message;
+
+      //       if (message.includes("Deleted")) {
+      //         toast.classList.add("error");
+      //       } else if (
+      //         message.includes("Added") ||
+      //         message.includes("Successfully")
+      //       ) {
+      //         toast.classList.add("success");
+      //       }
+
+      toast.classList.add("toast");
+
+      const varityType = ["success", "error"];
+      if (varityType.includes(type)) {
+        toast.classList.add(type);
+      }
+
+      const icon = document.createElement("i");
+
+      if (type === "success") {
+        icon.classList.add("fa-solid", "fa-circle-check");
+      } else if (type === "error") {
+        icon.classList.add("fa-solid", "fa-circle-exclamation");
+      }
+
+      const text = document.createTextNode(" " + message);
+
+      toast.appendChild(icon);
+      toast.appendChild(text);
+
+      ToastNotification.append(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 5000);
+    };
+
+    Buttons.addEventListener("click", (e) => {
+      if (e.target.classList.contains("Add")) {
+        showToast("Successfully Added Item...", "success");
+      } else if (e.target.classList.contains("Delete")) {
+        showToast("Deleted Item...", "error");
+      }
+    });
+  </script>
+</html>

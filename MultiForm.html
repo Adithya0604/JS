@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MultiForm</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .MainContainer {
+      width: 500px;
+      height: 500px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      padding: 40px;
+    }
+    h2 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .section {
+      width: 60px;
+      height: 60px;
+      border: 3px solid #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #666;
+      background: white;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .section-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 100px;
+    }
+    .ProgressBarMain {
+      width: 80%;
+      height: 10px;
+      border: 1px solid black;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progressBarClass {
+      height: 100%;
+      width: 25%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+    #MoveButtonBackward {
+      background: #f0f0f0;
+      color: #666;
+    }
+    #MoveButtonBackward:hover:not(:disabled) {
+      background: #e0e0e0;
+      transform: translateY(-2px);
+    }
+    #MoveButtonForward {
+      background: #667eea;
+      color: white;
+    }
+
+    #MoveButtonForward:hover:not(:disabled) {
+      background: #5a6fd8;
+      transform: translateY(-2px);
+    }
+
+    #Submit {
+      background: #4caf50;
+      color: white;
+      display: none;
+    }
+
+    #Submit:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .thank-you-message {
+      text-align: center;
+      color: #4caf50;
+      font-size: 20px;
+      font-weight: bold;
+      animation: fadeIn 0.5s ease-in;
+    }
+  </style>
+  <body>
+    <div class="MainContainer">
+      <h2 class="h2">Multi Form Submission</h2>
+
+      <div class="ProgressBarMain">
+        <div class="progressBarClass" id="ProgressBarID"></div>
+      </div>
+
+      <div class="section-container">
+        <div class="section" id="1st">1</div>
+        <div class="section" id="2nd">2</div>
+        <div class="section" id="3rd">3</div>
+        <div class="section" id="4th">4</div>
+      </div>
+
+      <button id="MoveButtonBackWard">Previous</button>
+      <button id="MoveButtonForward">Next</button>
+      <button id="Submit">Submit</button>
+    </div>
+    <script>
+      const h2 = document.querySelector(".h2");
+      const Next = document.getElementById("MoveButtonForward");
+      const Previous = document.getElementById("MoveButtonBackWard");
+      const Submit = document.getElementById("Submit");
+      const section = document.querySelectorAll(".section");
+      const MainContainer = document.querySelector(".MainContainer");
+      const progressBarClass = document.querySelector(".progressBarClass");
+
+      let currentIndex = 0;
+      const FinalLength = section.length;
+      limit = 1;
+      section[currentIndex].style.backgroundColor = "red";
+
+      Next.addEventListener("click", (e) => {
+        if (currentIndex < FinalLength - 1) {
+          section[currentIndex].style.backgroundColor = "white";
+          currentIndex++;
+          section[currentIndex].style.backgroundColor = "red";
+        } else {
+          Next.style.display = "None";
+          Previous.style.display = "None";
+          Submit.style.display = "block";
+        }
+      });
+
+      Previous.addEventListener("click", () => {
+        if (currentIndex >= 1 && currentIndex <= FinalLength - 1) {
+          section[currentIndex].style.backgroundColor = "white";
+          currentIndex--;
+          section[currentIndex].style.backgroundColor = "red";
+        } else {
+          alert("Please enter the values...");
+        }
+      });
+
+      const finalprogressBarClass = (currentIndex / FinalLength - 1) * 100;
+      progressBarClass.style.width = finalprogressBarClass;
+
+      Submit.addEventListener("click", (e) => {
+        if (currentIndex === FinalLength - 1 && limit >= 1) {
+          limit--;
+
+          const displayNoneList = [
+            document.querySelector(".h2"),
+            document.getElementById("MoveButtonForward"),
+            document.getElementById("MoveButtonBackWard"),
+            document.querySelector(".progressBarClass"),
+            document.querySelectorAll(".section"),
+          ];
+
+          displayNoneList.forEach((eachList) => {
+            eachList.style.display = "none";
+          });
+
+          const msg = document.createElement("div");
+          msg.textContent = "Thank you for filling this form";
+          MainContainer.appendChild(msg);
+        } else if (limit === 0) {
+          alert("Message is already submitted");
+        } else {
+          alert("You have to verify eveyr thing before the submmition");
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<!-- //         should check the length of the boxes like there are 4 then if the color is in the 4th box then it should not go beyound that 4th box right after that there should be a submit buton will apper when the color is on the final box and tehn submit butyton is cliked then thank you message shoudl be displayed .
+  // Case :- if the color in 1st then when the next button is cliked then the length will be checked nad if the length is in the limit then change the color to other box and set the color of the prev one to white and when the prev button is pressed then we have to rteverse the next button by change the current box color to white and prev box to red and checking length is important.
+  //         if() -->
+
+
+  <!-- const h2 = document.querySelector(".h2");
+  const Next = document.getElementById("MoveButtonForward");
+  const Previous = document.getElementById("MoveButtonBackWard");
+  const Submit = document.getElementById("Submit");
+  const sections = document.querySelectorAll(".section");
+  const MainContainer = document.querySelector(".MainContainer");
+  const progressBar = document.querySelector(".progressBarClass");
+
+  let currentIndex = 0;
+  const totalSteps = sections.length;
+  let limit = 1;
+
+  // Initialize
+  updateStep();
+
+  // Next button logic
+  Next.addEventListener("click", () => {
+    if (currentIndex < totalSteps - 1) {
+      currentIndex++;
+      updateStep();
+    }
+  });
+
+  // Previous button logic
+  Previous.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateStep();
+    }
+  });
+
+  // Submit button logic
+  Submit.addEventListener("click", () => {
+    if (currentIndex === totalSteps - 1 && limit > 0) {
+      limit--;
+
+      // Hide all elements
+      h2.style.display = "none";
+      Next.style.display = "none";
+      Previous.style.display = "none";
+      Submit.style.display = "none";
+      progressBar.style.display = "none";
+      sections.forEach((sec) => (sec.style.display = "none"));
+
+      const msg = document.createElement("div");
+      msg.className = "thank-you-message";
+      msg.textContent = "Thank you for filling this form";
+      MainContainer.appendChild(msg);
+    } else if (limit === 0) {
+      alert("Message is already submitted");
+    } else {
+      alert("You have to verify everything before submission");
+    }
+  });
+
+  // Update UI on step change
+  function updateStep() {
+    sections.forEach((sec, idx) => {
+      sec.style.backgroundColor = idx === currentIndex ? "red" : "white";
+    });
+
+    // Progress bar width
+    const progress = ((currentIndex + 1) / totalSteps) * 100;
+    progressBar.style.width = `${progress}%`;
+
+    // Button visibility
+    Previous.disabled = currentIndex === 0;
+    if (currentIndex === totalSteps - 1) {
+      Next.style.display = "none";
+      Submit.style.display = "block";
+    } else {
+      Next.style.display = "inline-block";
+      Submit.style.display = "none";
+    }
+  }
+</script> -->

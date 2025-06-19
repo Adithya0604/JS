@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body.light-Theme {
+      background-color: #fff;
+      color: black;
+    }
+    body.dark-Theme {
+      background-color: #000;
+      color: #fff;
+    }
+  </style>
+  <body>
+    <div>
+      <button id="btn">Click me for changing the theam</button>
+    </div>
+    <script>
+      const toggleButton = document.getElementById("btn");
+
+      toggleButton.addEventListener("click", () => {
+        const ChangeTheme = document.body.classList.contains("light-Theme");
+        document.body.classList.toggle("light-Theme", !ChangeTheme);
+        document.body.classList.toggle("dark-Theme", ChangeTheme);
+      });
+    </script>
+  </body>
+</html>

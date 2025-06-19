@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todolist</title>
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    /> -->
+  </head>
+  <!-- <style>
+    .toastNotification {
+      position: fixed;
+      bottom: 0px;
+      right: 20px;
+      border: 2px solid black;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      z-index: 9999;
+    }
+    .toast {
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      min-width: 400px;
+      position: absolute;
+      font-size: 18px;
+    }
+    .toast.Add {
+      border: 1px solid rgb(234, 224, 224);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .toast.error {
+      border: 0px solid red;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgb(234, 224, 224);
+    }
+    .toast.Add i {
+      margin-right: 20px;
+      color: #196819;
+      font-size: 18px;
+    }
+    .toast.error i {
+      color: red;
+    }
+    .toast:after {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+      left: 0;
+      height: 3px;
+      background-color: green;
+    }
+    .toast.error:after {
+      background-color: red;
+    } -->
+  <!-- </style> -->
+  <body>
+    <!-- <input
+      type="text"
+      name="WriteList"
+      id="WriteItem"
+      placeholder="Write Here"
+    />
+    <button type="button" id="AddItem">AddItem Into List</button> -->
+
+    <div class="Buttongroup">
+      <button id="AddingItem">AddItem</button>
+      <button id="DeletingItem">deleteItem</button>
+    </div>
+
+    <!-- Toast -->
+    <!-- <div class="toastnotification">
+      <!-- <div class="toast Add"> -->
+      <!-- <i class="fa-solid fa-circle-check">Successfully Added Item...</i> -->
+      <!-- </div> -->
+      <!-- <div class="toast error"> -->
+      <!-- <i class="fa-solid fa-circle-exclamation">Deleted Item...</i> -->
+      <!-- </div> -->
+    <!-- </div>  -->
+
+    <div class="toastnotification">
+      <!-- <div class="toast Add">
+          <i class="fa-solid fa-circle-check">Successfully Added the ite...</i>
+      </div>
+      <div class="toast Error">
+           <i class="fa-solid fa-circle-exclamation">Deleted Added the ite...</i>
+      </div> -->
+    </div>
+
+
+    <script>
+      const ToastNotification = document.querySelector('.toastnotification');
+      const Buttongroup = document.querySelector('.Buttongroup');
+
+      const showmessage = (message) => {
+
+      let toast = document.createElement('div');
+      toast.classList.add('toast');
+      toast.textContent = message;
+      ToastNotification.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 1000);
+
+    }
+
+    Buttongroup.addEventListener('click', (e) => {
+        if(e.target.id === 'AddingItem'){
+          showmessage('Successfully Added Item...');
+        }
+        else if(e.target.id === 'DeletingItem'){
+          showmessage('Deleted Added the ite...');
+        }
+    });
+
+
+
+    </script>
+
+    <!-- <script >
+      const InputItem = document.getElementById('WriteItem');
+      const AddButton = document.getElementById('AddItem');
+
+      const InputValue = InputItem.getBoundingClientRect.width + 'px';
+
+      // const Inputvalue = InputItem.value; 
+      // const charCount = Inputvalue.length;
+      // const finallength = charCount * 10 + 'px';
+
+      AddButton.addEventListener('click', (e) => {
+              e.preventDefault();
+
+              const Div = document.createElement('div');
+              const Span = document.createElement('span');
+              const DleButton = document.createElement('button');
+
+              
+              Span.style.width = InputValue;
+              
+              if(!InputItem.value){
+                alert('Please Enter the value');
+              }else{
+                Span.textContent = InputItem.value;
+                DleButton.textContent = 'Delete';
+                Div.appendChild(Span);
+                Div.appendChild(DleButton);
+              }
+
+
+              document.body.appendChild(Div);
+
+              InputItem.value = "";
+
+              DleButton.addEventListener('click', (e) => {
+                        e.preventDefault();
+
+                        Span.remove();
+                        DleButton.remove();
+              });
+
+      });
+
+    </script> -->
+
+
+
+
+
+
+    <!-- <script>
+      const AddingItem = document.getElementById("AddItem");
+      const InputItem = document.getElementById("WriteItem");
+      const toastNotification = document.querySelector(".toastnotification");
+
+      // Toast Notification
+      const showToast = (message) => {
+        let toast = document.createElement("div");
+        toast.classList.add("toast");
+        toast.innerHTML = message;
+        toastNotification.append(toast);
+
+        if (message.includes("Deleted")) {
+          toast.classList.add("error");
+        } else if (message.includes("Add")) {
+          toast.classList.add("Add");
+        }
+
+        setTimeout(() => {
+          toast.remove();
+        }, 5000);
+      };
+
+      // Event Handling From Here
+      AddingItem.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const CreatingListDiv = document.createElement("div");
+        const ListItemSpan = document.createElement("span");
+        const ListItemDelete = document.createElement("button");
+        let InputValue = InputItem.getBoundingClientRect.width + "px";
+        //         let charCount = InputValue.length;
+        //         const ListItemWidth = charCount * 10 + "px";
+
+        // Styles Starts
+        ListItemSpan.style.backgroundColor = "Gray";
+        ListItemSpan.style.border = "2px solid #000";
+        ListItemSpan.style.width = "InputValue";
+        ListItemSpan.style.margin = "5px 10px";
+        ListItemSpan.style.padding = "10px 10px";
+        ListItemSpan.style.outline = "none";
+        ListItemSpan.style.whiteSpace = "pre";
+
+        ListItemDelete.style.margin = "20px 20px";
+        ListItemDelete.style.padding = "10px 10px";
+        ListItemDelete.style.outline = "none";
+
+        // Styles Ends
+
+        if (!InputItem.value) {
+          showToast(
+            '<i class="fa-solid fa-keyboard">Please Enter SomeThing</i>'
+          );
+        } else {
+          ListItemSpan.textContent = InputItem.value;
+          ListItemDelete.textContent = "Delete Item from List...";
+          CreatingListDiv.append(ListItemSpan, ListItemDelete);
+          showToast(
+            '<i class="fa-solid fa-check">Successfully Added Item...</i>'
+          );
+        }
+
+        document.body.appendChild(CreatingListDiv);
+
+        InputItem.value = "";
+
+        ListItemDelete.addEventListener("click", (e) => {
+          e.preventDefault();
+          ListItemSpan.remove();
+          ListItemDelete.remove();
+          showToast(
+            '<i class="fa-solid fa-circle-exclamation">Deleted Item...</i>'
+          );
+        });
+      });
+
+      // keyCode event on Input Item
+      InputItem.addEventListener("keypress", (e) => {
+        if (e.keyCode === 13) {
+          AddingItem.click();
+        }
+        //         if(e.keyCode === 191){
+        //                                         InputItem.value
+        //         }
+      });
+    </script> -->
+  </body>
+</html>
+
+<!-- add and delete for evrry item -->
+<!-- <div>
+      <input id="Content" placeholder="Write here" />
+    </div>
+    <button id="AddBtn">Add Item</button>
+    <button id="DelBtn">Delete Item</button>
+  </body>
+  <script>
+    const AddButton = document.getElementById("AddBtn");
+    const DeleteButton = document.getElementById("DelBtn");
+    const InputContent = document.getElementById("Content");
+
+    AddButton.addEventListener("click", () => {
+      const AddDiv = document.createElement("div");
+      AddDiv.textContent = InputContent.textContent;
+      const DeleteButtonEvery = document.createElement('delete');
+    });
+
+    DeleteButtonEvery.addEventListener('click', () => {
+       const toDel = InputContent.textContent.toLowerCase();
+        InputContent.remove();
+    }); -->
+<!-- </script> -->
